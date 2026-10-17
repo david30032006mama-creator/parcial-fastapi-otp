@@ -65,16 +65,31 @@ el OTP correcto se entrega un JWT, y ese JWT se usa para las rutas protegidas.
 
 ## 2. Contribución individual (2.5 pts)
 
-Mi parte fue: [describe con tus palabras qué módulos escribiste]. La evidencia está en:
+Mi parte fue: Mi parte fue llevar el proyecto desde el código hasta tenerlo funcionando en internet.
+Para armar el código me apoyé en una herramienta de inteligencia artificial (Claude),
+que me generó la estructura del proyecto y las pruebas. Yo me encargué de lo demás:
+
+- Creé el repositorio en GitHub y subí el proyecto en cuatro commits por etapas:
+  configuración, aplicación, pruebas y documentación.
+- Configuré el servicio de correo con Brevo: creé la cuenta, verifiqué mi teléfono y
+  mi remitente, y generé la API key. Esa clave la guardé solo en las variables de
+  entorno de Render, nunca en el código ni en GitHub.
+- Hice el despliegue en Render: conecté el repositorio, puse el comando de arranque con
+  Gunicorn y Uvicorn, y configuré las variables de entorno (SECRET_KEY, APP_ENV, etc.).
+- Probé el sistema completo en producción desde /docs: registro, login, llegada del OTP
+  a mi correo, verificación, perfil y logout con el token revocado.
+- Guardé las capturas de los logs del despliegue exitoso.
+- Estudié el código archivo por archivo para poder explicar cómo funciona cada parte.
+
+La evidencia está en el historial de commits del repositorio, en las capturas de los
+logs de Render y en este documento.. La evidencia está en:
 - El historial de commits en GitHub (pestaña *Commits* / *Contributors*), con un
   commit por etapa: configuración, modelos, seguridad, OTP y correo, rutas, pruebas,
   documentación y despliegue.
 - El docstring de cada archivo, que lleva `Autor: David Armando Olmos Moreno`.
 - `CONTRIBUCIONES.md`: tabla por integrante y tabla de cumplimiento del enunciado.
 
-Si me preguntan por una función específica, abro el archivo y la explico línea por
-línea. Para probar que entiendo el código puedo hacer una modificación en vivo, por
-ejemplo cambiar la vigencia del OTP con `OTP_EXPIRE_MINUTES`.
+
 
 ---
 
@@ -101,14 +116,14 @@ SQLite es suficiente para el parcial, pero en producción usaría PostgreSQL.
 
 ## 4. Despliegue (2.5 pts)
 
-- Plataforma: [Render / Railway / otra]. URL: [ ].
+- Plataforma: [Render]. URL: [ https://parcial-fastapi-otp-f6ch.onrender.com ].
 - Archivos: `requirements.txt` (versiones fijas), `.env.example`, `Procfile` y
   `render.yaml`. Arranco con Gunicorn y workers de Uvicorn.
 - Variables de entorno configuradas en el panel de la plataforma (no en el código):
   `APP_ENV=production`, `SECRET_KEY` y la configuración de correo.
 - Evidencia: logs de despliegue exitoso [captura] y `/health` respondiendo `ok`.
 
-**Demostración en vivo** (en `[URL]/docs`):
+**Demostración en vivo** ( https://parcial-fastapi-otp-f6ch.onrender.com/docs):
 1. `POST /auth/register` con mi correo.
 2. `POST /auth/login` y mostrar el correo con el OTP.
 3. `POST /auth/verify-otp` y copiar el `access_token`.

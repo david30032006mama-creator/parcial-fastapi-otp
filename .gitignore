@@ -1,0 +1,16 @@
+# Secretos y entorno
+.env
+venv/
+.venv/
+
+# Base de datos local
+*.db
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editor
+.vscode/
+.idea/
